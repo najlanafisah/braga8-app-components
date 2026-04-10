@@ -6,6 +6,6 @@ class AppColors {
   
   // Variasi Putih
   static const Color whiteFull = Color(0xFFFFFFFF);
-  static Color white60 = Colors.white.withAlpha(6);
-  static Color white40 = Colors.white.withAlpha(4);
+  static Color white60 = Colors.white.withAlpha(128);
+  static Color white40 = Colors.white.withAlpha(102);
 }
