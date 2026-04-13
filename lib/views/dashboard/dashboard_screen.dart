@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../widgets/bottom_navbar_costom.dart';
 import '../../widgets/main_layouts.dart';
 import '../daftar-unit/daftar_unit_screen.dart';
-import 'components/header_navbar.dart';
 import 'components/dashboard_body.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -25,7 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     // List halaman dipisah di sini agar build method tetap bersih
     final List<Widget> _pages = [
-      DashboardBody(onMenuTap: _onItemTapped), // Halaman Home (Index 0)
+      DashboardBody(onMenuTap: _onItemTapped),
       Center(
         child: Text("Halaman Meter", style: TextStyle(color: Colors.white)),
       ),
@@ -43,7 +42,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              HeaderNavbar(),
               Expanded(
                 child: IndexedStack(index: _selectedIndex, children: _pages),
               ),

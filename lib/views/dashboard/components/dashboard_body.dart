@@ -1,3 +1,4 @@
+import 'package:braga8_app_components/views/dashboard/components/header_navbar.dart';
 import 'package:flutter/material.dart';
 import 'menu_grid.dart';
 import 'summary_card.dart';
@@ -15,6 +16,7 @@ class DashboardBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          HeaderNavbar(),
           PageHeader(
             title: "Halo, Jimmy!",
             subtitle: "Braga8 Utility Billing Management",
@@ -23,7 +25,7 @@ class DashboardBody extends StatelessWidget {
           SummaryCard(current: 46, total: 60, period: "Maret"),
           SizedBox(height: 30),
           _buildMenuGrid(),
-          SizedBox(height: 100), // Space buat navbar
+          SizedBox(height: 100),
         ],
       ),
     );
