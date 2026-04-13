@@ -8,7 +8,7 @@ class CustomSearchBar extends StatelessWidget {
 
   const CustomSearchBar({
     super.key,
-    this.hintText = "Search...",
+    this.hintText = "Cari...",
     this.onChanged,
     this.onSearchPressed,
     this.controller,

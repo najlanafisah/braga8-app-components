@@ -4,14 +4,14 @@ import 'package:braga8_app_components/widgets/page_header.dart';
 import 'package:braga8_app_components/widgets/custom_search_bar.dart';
 import '../../widgets/main_layouts.dart';
 
-class DaftarUnitScreen extends StatefulWidget {
-  const DaftarUnitScreen({super.key});
+class MeterInputScreen extends StatefulWidget {
+  const MeterInputScreen({super.key});
 
   @override
-  State<DaftarUnitScreen> createState() => _DaftarUnitScreenState();
+  State<MeterInputScreen> createState() => _MeterInputScreenState();
 }
 
-class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
+class _MeterInputScreenState extends State<MeterInputScreen> {
   final List<Map<String, dynamic>> _allTenants = [
     {"name": "Burger Bangor", "units": 2},
     {"name": "Kopi Kenangan", "units": 1},
@@ -62,7 +62,7 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
               children: [
                 SizedBox(height: 40),
                 PageHeader(
-                  title: "Daftar Unit",
+                  title: "Meter Input",
                   subtitle: "Braga8 Utility Billing Management",
                 ),
                 SizedBox(height: 30),
