@@ -1,7 +1,9 @@
+import 'package:braga8_app_components/widgets/action_button.dart';
+import 'package:braga8_app_components/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:braga8_app_components/widgets/table_card.dart';
-import 'package:braga8_app_components/widgets/page_header.dart';
-import 'package:braga8_app_components/widgets/custom_search_bar.dart';
+import '../../widgets/table_card.dart';
+import '../../widgets/page_header.dart';
+import '../../widgets/custom_search_bar.dart';
 import '../../widgets/main_layouts.dart';
 
 class DaftarUnitScreen extends StatefulWidget {
@@ -13,11 +15,32 @@ class DaftarUnitScreen extends StatefulWidget {
 
 class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
   final List<Map<String, dynamic>> _allTenants = [
-    {"name": "Burger Bangor", "units": 2},
-    {"name": "Kopi Kenangan", "units": 1},
-    {"name": "Indomaret Fresh", "units": 2},
-    {"name": "Solaria", "units": 4},
-    {"name": "Hokben", "units": 3},
+    {
+      "name": "Burger Bangor",
+      "units_list": [
+        {"unit": "2A", "floor": "2", "isCheck": true},
+        {"unit": "3A", "floor": "2", "isCheck": false},
+      ],
+    },
+    {
+      "name": "Kopi Kenangan",
+      "units_list": [
+        {"unit": "1B", "floor": "1", "isCheck": false},
+      ],
+    },
+    {
+      "name": "Indomaret Fresh",
+      "units_list": [
+        {"unit": "GF1", "floor": "G", "isCheck": true},
+        {"unit": "GF5", "floor": "G", "isCheck": true},
+      ],
+    },
+    {
+      "name": "Solaria",
+      "units_list": [
+        {"unit": "3C", "floor": "3", "isCheck": false},
+      ],
+    },
   ];
 
   List<Map<String, dynamic>> _filteredTenants = [];
@@ -73,6 +96,7 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
                   onSearchPressed: () => _filterData(_searchController.text),
                 ),
                 SizedBox(height: 30),
+
                 if (_filteredTenants.isEmpty)
                   Center(
                     child: Padding(
@@ -84,14 +108,36 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
                     ),
                   )
                 else
-                  Column(
-                    children: _filteredTenants.map((tenant) {
-                      return TableCard(
-                        tenantName: tenant['name'],
-                        totalUnits: tenant['units'],
-                      );
-                    }).toList(),
-                  ),
+                  ..._filteredTenants.map((tenant) {
+                    return TableCard(
+                      prefix: "Tenant:",
+                      main: tenant['name'],
+                      columns: [
+                        "Unit",
+                        "Floor",
+                        "Electricity",
+                        "Water",
+                        "Actions",
+                      ],
+                      data: List<Map<String, dynamic>>.from(
+                        tenant['units_list'],
+                      ),
+                      rowBuilder: (item) => [
+                        _buildCellText(item['unit']),
+                        _buildCellText(item['floor']),
+                        StatusBadge(isChecked: item['isCheck']),
+                        StatusBadge(isChecked: false),
+                        ActionButton(
+                          label: item['isCheck'] ? "View" : "Input",
+                          icon: item['isCheck'] ? Icons.visibility : Icons.add,
+                          color: item['isCheck']
+                              ? Colors.blueGrey
+                              : Colors.orange,
+                          onPressed: () {},
+                        ),
+                      ],
+                    );
+                  }),
                 SizedBox(height: 30),
               ],
             ),
@@ -99,5 +145,9 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildCellText(String text) {
+    return Text(text, style: TextStyle(color: Colors.white, fontSize: 13));
   }
 }
