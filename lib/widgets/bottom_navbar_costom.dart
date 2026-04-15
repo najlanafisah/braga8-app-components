@@ -28,7 +28,7 @@ class BottomNavbarCustom extends StatelessWidget {
               _navItem(1, Icons.speed, "Meter"),
               _navItem(2, Icons.list_alt_rounded, "List"),
               _navItem(3, Icons.history, "History"),
-              _navItem(4, Icons.history_toggle_off, "Log"),
+              _navItem(4, Icons.feedback, "Report"),
             ],
           ),
         ),

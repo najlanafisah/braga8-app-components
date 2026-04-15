@@ -44,25 +44,32 @@ class _HistoryScreenState extends State<HistoryScreen> {
     },
   ];
 
-  List<Map<String, dynamic>> _filteredTenants = [];
+  // Variabel untuk menyimpan baris data yang sudah difilter
+  List<Map<String, dynamic>> _filteredHistories = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _filteredTenants = _allTenants;
+    // Inisialisasi awal: ambil semua data dari histories_data pertama
+    _filteredHistories = List<Map<String, dynamic>>.from(_allTenants[0]['histories_data']);
   }
 
   void _filterData(String query) {
     setState(() {
+      // Ambil data asli sebagai referensi pencarian
+      List<Map<String, dynamic>> allData = List<Map<String, dynamic>>.from(_allTenants[0]['histories_data']);
+
       if (query.isEmpty) {
-        _filteredTenants = _allTenants;
+        _filteredHistories = allData;
       } else {
-        _filteredTenants = _allTenants.where((tenant) {
-          final histories = tenant['histories_data'] as List;
-          return histories.any(
-            (h) => h['name'].toLowerCase().contains(query.toLowerCase()),
-          );
+        _filteredHistories = allData.where((h) {
+          final name = h['name'].toString().toLowerCase();
+          final activity = h['activity'].toString().toLowerCase();
+          final search = query.toLowerCase();
+          
+          // Mencari di kolom Nama ATAU kolom Aktivitas
+          return name.contains(search) || activity.contains(search);
         }).toList();
       }
     });
@@ -92,13 +99,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 SizedBox(height: 30),
                 CustomSearchBar(
                   controller: _searchController,
-                  hintText: "Cari Tenant / Unit...",
+                  hintText: "Cari Nama atau Aktivitas...",
                   onChanged: (value) => _filterData(value),
                   onSearchPressed: () => _filterData(_searchController.text),
                 ),
                 SizedBox(height: 30),
 
-                if (_filteredTenants.isEmpty)
+                // Cek jika hasil filter kosong
+                if (_filteredHistories.isEmpty)
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: 20),
@@ -109,49 +117,46 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     ),
                   )
                 else
-                  ..._filteredTenants.map((tenant) {
-                    return TableCard(
-                      main: "History",
-                      columns: ["No", "Name", "Activity", "Done At"],
-                      data: List<Map<String, dynamic>>.from(
-                        tenant['histories_data'],
-                      ),
-                      onRowTap: (item) {
-                        PopUpDetail.showDetail(
-                          context: context,
-                          title: "Detail Activity",
-                          infoData: [
-                            {"label": "Name", "value": item['name']},
-                            {"label": "Activity", "value": item['activity']},
-                            {"label": "Time", "value": item['done at']},
-                          ],
-                        );
-                      },
-                      rowBuilder: (item) => [
-                        Text(item['no'], style: TextStyle(color: Colors.white)),
-                        Expanded(
-                          child: Text(
-                            item['name'],
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            item['activity'],
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        Text(
-                          item['done at'],
+                  // Langsung panggil TableCard satu kali dengan data yang sudah difilter
+                  TableCard(
+                    main: "History",
+                    columns: ["No", "Name", "Activity", "Done At"],
+                    data: _filteredHistories,
+                    onRowTap: (item) {
+                      PopUpDetail.showDetail(
+                        context: context,
+                        title: "Detail Activity",
+                        infoData: [
+                          {"label": "Name", "value": item['name']},
+                          {"label": "Activity", "value": item['activity']},
+                          {"label": "Time", "value": item['done at']},
+                        ],
+                      );
+                    },
+                    rowBuilder: (item) => [
+                      Text(item['no'], style: TextStyle(color: Colors.white)),
+                      Expanded(
+                        child: Text(
+                          item['name'],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                           style: TextStyle(color: Colors.white),
                         ),
-                      ],
-                    );
-                  }),
+                      ),
+                      Expanded(
+                        child: Text(
+                          item['activity'],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Text(
+                        item['done at'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
                 SizedBox(height: 50),
               ],
             ),
