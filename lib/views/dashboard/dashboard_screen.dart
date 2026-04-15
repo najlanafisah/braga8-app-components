@@ -1,3 +1,5 @@
+import 'package:braga8_app_components/views/history/history_screen.dart';
+import 'package:braga8_app_components/views/list-komplain/complains_screen.dart';
 import 'package:braga8_app_components/views/meter-input/meter_input_screen.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/bottom_navbar_costom.dart';
@@ -28,12 +30,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       DashboardBody(onMenuTap: _onItemTapped),
       MeterInputScreen(),
       DaftarUnitScreen(),
-      Center(
-        child: Text("Halaman History", style: TextStyle(color: Colors.white)),
-      ),
-      Center(
-        child: Text("Halaman Profile", style: TextStyle(color: Colors.white)),
-      ),
+      HistoryScreen(),
+      ComplainsScreen()
     ];
 
     return Scaffold(

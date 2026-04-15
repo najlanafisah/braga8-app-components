@@ -7,9 +7,11 @@ class TableCard extends StatelessWidget {
   final List<String> columns;
   final List<Map<String, dynamic>> data;
   final List<Widget> Function(Map<String, dynamic> item) rowBuilder;
+  final Function(Map<String, dynamic> item)? onRowTap;
 
   const TableCard({
     super.key,
+    this.onRowTap,
     this.prefix,
     this.main,
     this.suffix,
@@ -101,9 +103,14 @@ class TableCard extends StatelessWidget {
               ),
               ...data.map(
                 (item) => TableRow(
-                  children: rowBuilder(
-                    item,
-                  ).map((widget) => _cell(widget)).toList(),
+                  children: rowBuilder(item).map((widget) {
+                    return GestureDetector(
+                      behavior: HitTestBehavior
+                          .opaque, // Agar seluruh area sel bisa diklik
+                      onTap: () => onRowTap?.call(item),
+                      child: _cell(widget),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
