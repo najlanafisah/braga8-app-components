@@ -40,25 +40,44 @@ class _HistoryScreenState extends State<HistoryScreen> {
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
+        {
+          "no": "5",
+          "name": "Quan",
+          "activity": "Added Meter Readings",
+          "done at": "8 PM 3/10/2026",
+        },
+        {
+          "no": "6",
+          "name": "Ancut",
+          "activity": "Added Meter Readings",
+          "done at": "8 PM 3/10/2026",
+        },
+        {
+          "no": "7",
+          "name": "Ekin",
+          "activity": "Added Electricity Readings",
+          "done at": "8 PM 3/10/2026",
+        },
       ],
     },
   ];
 
-  // Variabel untuk menyimpan baris data yang sudah difilter
   List<Map<String, dynamic>> _filteredHistories = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // Inisialisasi awal: ambil semua data dari histories_data pertama
-    _filteredHistories = List<Map<String, dynamic>>.from(_allTenants[0]['histories_data']);
+    _filteredHistories = List<Map<String, dynamic>>.from(
+      _allTenants[0]['histories_data'],
+    );
   }
 
   void _filterData(String query) {
     setState(() {
-      // Ambil data asli sebagai referensi pencarian
-      List<Map<String, dynamic>> allData = List<Map<String, dynamic>>.from(_allTenants[0]['histories_data']);
+      List<Map<String, dynamic>> allData = List<Map<String, dynamic>>.from(
+        _allTenants[0]['histories_data'],
+      );
 
       if (query.isEmpty) {
         _filteredHistories = allData;
@@ -67,8 +86,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           final name = h['name'].toString().toLowerCase();
           final activity = h['activity'].toString().toLowerCase();
           final search = query.toLowerCase();
-          
-          // Mencari di kolom Nama ATAU kolom Aktivitas
+
           return name.contains(search) || activity.contains(search);
         }).toList();
       }
@@ -105,7 +123,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ),
                 SizedBox(height: 30),
 
-                // Cek jika hasil filter kosong
                 if (_filteredHistories.isEmpty)
                   Center(
                     child: Padding(
@@ -117,9 +134,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     ),
                   )
                 else
-                  // Langsung panggil TableCard satu kali dengan data yang sudah difilter
                   TableCard(
                     main: "History",
+                    showUnitCount: false,
                     columns: ["No", "Name", "Activity", "Done At"],
                     data: _filteredHistories,
                     onRowTap: (item) {

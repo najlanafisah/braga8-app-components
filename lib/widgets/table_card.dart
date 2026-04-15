@@ -8,6 +8,7 @@ class TableCard extends StatelessWidget {
   final List<Map<String, dynamic>> data;
   final List<Widget> Function(Map<String, dynamic> item) rowBuilder;
   final Function(Map<String, dynamic> item)? onRowTap;
+  final bool showUnitCount;
 
   const TableCard({
     super.key,
@@ -18,6 +19,7 @@ class TableCard extends StatelessWidget {
     required this.columns,
     required this.data,
     required this.rowBuilder,
+    this.showUnitCount = true,
   });
 
   @override
@@ -57,10 +59,11 @@ class TableCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Text(
-                    suffix ?? "${data.length} Units",
-                    style: TextStyle(color: Colors.white38, fontSize: 14),
-                  ),
+                  if (showUnitCount)
+                    Text(
+                      "${data.length} Units",
+                      style: TextStyle(color: Colors.white38, fontSize: 14),
+                    ),
                 ],
               ),
             ),
