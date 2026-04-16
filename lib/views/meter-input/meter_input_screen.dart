@@ -111,6 +111,14 @@ class _MeterInputScreenState extends State<MeterInputScreen> {
                   ..._filteredTenants.map((tenant) {
                     return TableCard(
                       prefix: "Tenant:",
+                      columnWidths: {
+                        0: FixedColumnWidth(50),
+                        1: FixedColumnWidth(50),
+                        2: FlexColumnWidth(1.4),
+                        3: FlexColumnWidth(1.4),
+                        4: FixedColumnWidth(90),
+                      },
+                      suffixText: "${_allTenants.length} Units",
                       main: tenant['name'],
                       columns: [
                         "Unit",
@@ -139,13 +147,12 @@ class _MeterInputScreenState extends State<MeterInputScreen> {
                           color: item['isCheck']
                               ? Colors.blueGrey
                               : Colors.orange,
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     );
                   }),
-                SizedBox(height: 50), 
+                SizedBox(height: 50),
               ],
             ),
           ),

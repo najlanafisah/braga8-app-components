@@ -111,7 +111,15 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
                   ..._filteredTenants.map((tenant) {
                     return TableCard(
                       prefix: "Tenant:",
+                      suffixText: "${_allTenants.length} Units",
                       main: tenant['name'],
+                      columnWidths: {
+                        0: FixedColumnWidth(50),
+                        1: FixedColumnWidth(50),
+                        2: FlexColumnWidth(1.4),
+                        3: FlexColumnWidth(1.4),
+                        4: FixedColumnWidth(90),
+                      },
                       columns: [
                         "Unit",
                         "Floor",
@@ -123,8 +131,14 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
                         tenant['units_list'],
                       ),
                       rowBuilder: (item) => [
-                        _buildCellText(item['unit']),
-                        _buildCellText(item['floor']),
+                        Text(
+                          item['unit'],
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          item['floor'],
+                          style: TextStyle(color: Colors.white),
+                        ),
                         StatusBadge(isChecked: item['isCheck']),
                         StatusBadge(isChecked: false),
                         ActionButton(
@@ -145,9 +159,5 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
         ),
       ),
     );
-  }
-
-  Widget _buildCellText(String text) {
-    return Text(text, style: TextStyle(color: Colors.white, fontSize: 13));
   }
 }

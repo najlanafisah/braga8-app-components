@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:braga8_app_components/widgets/action_button.dart';
+import 'package:braga8_app_components/widgets/custom_search_bar.dart';
+import 'package:braga8_app_components/widgets/main_layouts.dart';
+import 'package:braga8_app_components/widgets/page_header.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
-import '../../widgets/table_card.dart';
-import '../../widgets/page_header.dart';
-import '../../widgets/custom_search_bar.dart';
-import '../../widgets/main_layouts.dart';
+import 'package:braga8_app_components/widgets/table_card.dart';
+import 'package:flutter/material.dart';
 
 class ComplainsScreen extends StatefulWidget {
   const ComplainsScreen({super.key});
@@ -16,53 +16,48 @@ class ComplainsScreen extends StatefulWidget {
 class _ComplainsScreenState extends State<ComplainsScreen> {
   final List<Map<String, dynamic>> _allTenants = [
     {
-      "name": "Burger Bangor",
-      "units_data": [
-        {"unit": "2A", "floor": "2", "isCheck": true},
-        {"unit": "3A", "floor": "2", "isCheck": false},
-      ],
-    },
-    {
-      "name": "Kopi Kenangan",
-      "units_data": [
-        {"unit": "1B", "floor": "1", "isCheck": false},
-      ],
-    },
-    {
-      "name": "Indomaret Fresh",
-      "units_data": [
-        {"unit": "GF1", "floor": "G", "isCheck": true},
-        {"unit": "GF2", "floor": "G", "isCheck": true},
-      ],
-    },
-    {
-      "name": "Solaria",
-      "units_data": [
-        {"unit": "4C", "floor": "4", "isCheck": false},
+      "histories_data": [
+        {
+          "judul": "meter reading tidak sesuai",
+          "keterangan": "meter ga berfungsi dengan baiq",
+          "isCheck": false,
+        },
+        {
+          "judul": "meter reading tidak sesuai",
+          "keterangan": "meter ga berfungsi dengan baiq",
+          "isCheck": false,
+        },
       ],
     },
   ];
 
-  List<Map<String, dynamic>> _filteredTenants = [];
+  List<Map<String, dynamic>> _filteredHistories = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _filteredTenants = _allTenants;
+    _filteredHistories = List<Map<String, dynamic>>.from(
+      _allTenants[0]['histories_data'],
+    );
   }
 
   void _filterData(String query) {
     setState(() {
+      List<Map<String, dynamic>> allData = List<Map<String, dynamic>>.from(
+        _allTenants[0]['histories_data'],
+      );
+
       if (query.isEmpty) {
-        _filteredTenants = _allTenants;
+        _filteredHistories = allData;
       } else {
-        _filteredTenants = _allTenants
-            .where(
-              (tenant) =>
-                  tenant['name'].toLowerCase().contains(query.toLowerCase()),
-            )
-            .toList();
+        _filteredHistories = allData.where((h) {
+          final keterangan = h['keterangan'].toString().toLowerCase();
+          final judul = h['judul'].toString().toLowerCase();
+          final search = query.toLowerCase();
+
+          return keterangan.contains(search);
+        }).toList();
       }
     });
   }
@@ -97,7 +92,7 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                 ),
                 SizedBox(height: 30),
 
-                if (_filteredTenants.isEmpty)
+                if (_filteredHistories.isEmpty)
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: 20),
@@ -108,44 +103,42 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                     ),
                   )
                 else
-                  ..._filteredTenants.map((tenant) {
+                  ..._filteredHistories.map((item) {
                     return TableCard(
-                      prefix: "Tenant:",
-                      main: tenant['name'],
-                      columns: [
-                        "Unit",
-                        "Floor",
-                        "Electricity",
-                        "Water",
-                        "Actions",
-                      ],
-                      data: List<Map<String, dynamic>>.from(
-                        tenant['units_data'],
-                      ),
-                      rowBuilder: (item) => [
-                        Text(
-                          item['unit'],
-                          style: TextStyle(color: Colors.white),
+                      main: item['judul'] ?? "Komplain Tanpa Judul",
+                      suffixText: "12/04/2026",
+                      columnWidths: {
+                        0: FlexColumnWidth(2.5),
+                        1: FixedColumnWidth(100),
+                        2: FixedColumnWidth(100),
+                        3: FixedColumnWidth(2),
+                        4: FixedColumnWidth(2),
+                      },
+                      columns: ["Keterangan", "Status", "Actions"],
+                      data: [item],
+                      rowBuilder: (currentItem) => [
+                        Padding(
+                          padding: EdgeInsets.only(left: 6),
+                          child: Text(
+                            currentItem['keterangan'] ?? "",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        Text(
-                          item['floor'],
-                          style: TextStyle(color: Colors.white),
+                        StatusBadge(
+                          isChecked: currentItem['isCheck'] ?? false,
                         ),
-                        StatusBadge(isChecked: item['isCheck']),
-                        StatusBadge(isChecked: false),
                         ActionButton(
-                          label: item['isCheck'] ? "View" : "Input",
-                          icon: item['isCheck'] ? Icons.visibility : Icons.add,
-                          color: item['isCheck']
-                              ? Colors.blueGrey
-                              : Colors.orange,
+                          label: "view",
+                          icon: Icons.visibility,
+                          color: Colors.blueGrey,
                           onPressed: () {
                           },
                         ),
                       ],
                     );
                   }),
-                SizedBox(height: 50), 
+                SizedBox(height: 50),
               ],
             ),
           ),

@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     // List halaman dipisah di sini agar build method tetap bersih
-    final List<Widget> _pages = [
+    final List<Widget> pages = [
       DashboardBody(onMenuTap: _onItemTapped),
       MeterInputScreen(),
       DaftarUnitScreen(),
@@ -40,7 +40,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: Column(
             children: [
               Expanded(
-                child: IndexedStack(index: _selectedIndex, children: _pages),
+                child: IndexedStack(index: _selectedIndex, children: pages),
               ),
               BottomNavbarCustom(
                 currentIndex: _selectedIndex,

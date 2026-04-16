@@ -9,6 +9,8 @@ class TableCard extends StatelessWidget {
   final List<Widget> Function(Map<String, dynamic> item) rowBuilder;
   final Function(Map<String, dynamic> item)? onRowTap;
   final bool showUnitCount;
+  final String? suffixText;
+  final Map<int, TableColumnWidth>? columnWidths;
 
   const TableCard({
     super.key,
@@ -20,6 +22,8 @@ class TableCard extends StatelessWidget {
     required this.data,
     required this.rowBuilder,
     this.showUnitCount = true,
+    this.suffixText,
+    this.columnWidths,
   });
 
   @override
@@ -59,9 +63,9 @@ class TableCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (showUnitCount)
+                  if (suffixText != null)
                     Text(
-                      "${data.length} Units",
+                      suffixText!,
                       style: TextStyle(color: Colors.white38, fontSize: 14),
                     ),
                 ],
@@ -69,17 +73,14 @@ class TableCard extends StatelessWidget {
             ),
 
           Table(
-            columnWidths: {
-              0: FixedColumnWidth(55),
-              1: FixedColumnWidth(50),
-              4: FlexColumnWidth(1.2),
-            },
-            defaultColumnWidth: FlexColumnWidth(1.0),
-            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-            border: TableBorder(
-              horizontalInside: BorderSide(color: Colors.white10, width: 0.5),
-              verticalInside: BorderSide(color: Colors.white10, width: 0.5),
-            ),
+            columnWidths:
+                columnWidths ??
+                {
+                  0: FixedColumnWidth(40), // Default No/Keterangan
+                  1: FlexColumnWidth(1), // Default Tengah
+                  2: FlexColumnWidth(1), // Default Tengah
+                  3: IntrinsicColumnWidth(),
+                },
             children: [
               TableRow(
                 decoration: BoxDecoration(
@@ -93,10 +94,10 @@ class TableCard extends StatelessWidget {
                       (col) => _cell(
                         Text(
                           col,
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 11,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -108,8 +109,7 @@ class TableCard extends StatelessWidget {
                 (item) => TableRow(
                   children: rowBuilder(item).map((widget) {
                     return GestureDetector(
-                      behavior: HitTestBehavior
-                          .opaque, // Agar seluruh area sel bisa diklik
+                      behavior: HitTestBehavior.opaque,
                       onTap: () => onRowTap?.call(item),
                       child: _cell(widget),
                     );
@@ -124,7 +124,13 @@ class TableCard extends StatelessWidget {
   }
 
   Widget _cell(Widget child) => Padding(
-    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 4),
-    child: Center(child: child),
+    padding: EdgeInsets.symmetric(
+      vertical: 12,
+      horizontal: 8,
+    ),
+    child: Align(
+      alignment: Alignment.centerLeft,
+      child: child,
+    ),
   );
 }

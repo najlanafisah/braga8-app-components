@@ -18,43 +18,43 @@ class _HistoryScreenState extends State<HistoryScreen> {
       "histories_data": [
         {
           "no": "1",
-          "name": "Lala",
+          "name": "Najla Nafisah",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "2",
-          "name": "Najla",
+          "name": "Quaneisha",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "3",
-          "name": "Nana",
+          "name": "Nafisah Najala",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "4",
-          "name": "Nafish",
+          "name": "Aluna eykin",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "5",
-          "name": "Quan",
+          "name": "Khansa Ancut",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "6",
-          "name": "Ancut",
+          "name": "Ancaaaaaaaa",
           "activity": "Added Meter Readings",
           "done at": "8 PM 3/10/2026",
         },
         {
           "no": "7",
-          "name": "Ekin",
+          "name": "Najla Nafissahxn",
           "activity": "Added Electricity Readings",
           "done at": "8 PM 3/10/2026",
         },
@@ -136,6 +136,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 else
                   TableCard(
                     main: "History",
+                    columnWidths: {
+                      0: FixedColumnWidth(40),
+                      1: FlexColumnWidth(1),
+                    },
                     showUnitCount: false,
                     columns: ["No", "Name", "Activity", "Done At"],
                     data: _filteredHistories,
@@ -168,9 +172,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      Text(
-                        item['done at'],
-                        style: TextStyle(color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          item['done at'],
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
