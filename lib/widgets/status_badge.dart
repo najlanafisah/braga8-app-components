@@ -8,11 +8,11 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Logika warna & label otomatis
-    final color = isChecked ? const Color(0xFF4CAF50) : const Color(0xFFE57373);
+    final color = isChecked ? Color(0xFF4CAF50) : Color(0xFFE57373);
     final label = isChecked ? "Checked" : "Unchecked";
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(20),

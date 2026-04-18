@@ -25,30 +25,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // List halaman dipisah di sini agar build method tetap bersih
     final List<Widget> pages = [
       DashboardBody(onMenuTap: _onItemTapped),
       MeterInputScreen(),
       DaftarUnitScreen(),
       HistoryScreen(),
-      ComplainsScreen()
+      ComplainsScreen(),
     ];
 
     return Scaffold(
+      extendBody: true,
+      backgroundColor: Color(0xFF141315),
       body: MainLayout(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: IndexedStack(index: _selectedIndex, children: pages),
-              ),
-              BottomNavbarCustom(
-                currentIndex: _selectedIndex,
-                onTap: _onItemTapped,
-              ),
-            ],
-          ),
-        ),
+        child: IndexedStack(index: _selectedIndex, children: pages),
+      ),
+      bottomNavigationBar: BottomNavbarCustom(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

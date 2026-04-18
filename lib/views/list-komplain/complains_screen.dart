@@ -1,5 +1,7 @@
+import 'package:braga8_app_components/views/edit-laporan/edit_laporan_screen.dart';
 import 'package:braga8_app_components/widgets/action_button.dart';
 import 'package:braga8_app_components/widgets/custom_search_bar.dart';
+import 'package:braga8_app_components/widgets/glassy_btn.dart';
 import 'package:braga8_app_components/widgets/main_layouts.dart';
 import 'package:braga8_app_components/widgets/page_header.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
@@ -23,9 +25,32 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
           "isCheck": false,
         },
         {
-          "judul": "meter reading tidak sesuai",
+          "judul": "electricity reading tidak sesuai",
           "keterangan": "meter ga berfungsi dengan baiq",
           "isCheck": false,
+        },
+        {
+          "judul": "petugas kurang ramah",
+          "keterangan": "petugas tidak menyapa tenant saat lewat",
+          "isCheck": true,
+        },
+        {
+          "judul": "koneksi jelek",
+          "keterangan":
+              "koneksi internet ga sampek ke tempat saya, jadi jelek fotonya",
+          "isCheck": false,
+        },
+        {
+          "judul": "lubang di atap",
+          "keterangan":
+              "atap saya jebol gara2 hujan 2 bulan lalu tapi gaada yang respon",
+          "isCheck": true,
+        },
+        {
+          "judul": "kamar mandi bocor",
+          "keterangan":
+              "kamar mandi saya airnya sering bocor, gaada yang mau benerin kah??",
+          "isCheck": true,
         },
       ],
     },
@@ -56,7 +81,7 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
           final judul = h['judul'].toString().toLowerCase();
           final search = query.toLowerCase();
 
-          return keterangan.contains(search);
+          return keterangan.contains(search) || judul.contains(search);
         }).toList();
       }
     });
@@ -84,11 +109,29 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                   subtitle: "Braga8 Utility Billing Management",
                 ),
                 SizedBox(height: 30),
-                CustomSearchBar(
-                  controller: _searchController,
-                  hintText: "Cari Komplain...",
-                  onChanged: (value) => _filterData(value),
-                  onSearchPressed: () => _filterData(_searchController.text),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomSearchBar(
+                        controller: _searchController,
+                        hintText: "Cari Komplain...",
+                        onChanged: (value) => _filterData(value),
+                        onSearchPressed: () =>
+                            _filterData(_searchController.text),
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    SizedBox(
+                      width: 85, 
+                      height: 55,
+                      child: GlassyBtn(
+                        label: "+  Add",
+                        onTap: () {
+                          Navigator.pushNamed(context, '/add-screen');
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 30),
 
@@ -125,14 +168,19 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        StatusBadge(
-                          isChecked: currentItem['isCheck'] ?? false,
-                        ),
+                        StatusBadge(isChecked: currentItem['isCheck'] ?? false),
                         ActionButton(
                           label: "view",
                           icon: Icons.visibility,
                           color: Colors.blueGrey,
                           onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    EditLaporanScreen(data: item),
+                              ),
+                            );
                           },
                         ),
                       ],

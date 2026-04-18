@@ -9,28 +9,26 @@ class BottomNavbarCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
-        child: Container(
-          height: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            image: DecorationImage(
-              image: AssetImage('assets/navbar-img.png'),
-              fit: BoxFit.cover,
-            ),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(24, 0, 24, 16),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          image: DecorationImage(
+            image: AssetImage('assets/navbar-img.png'),
+            fit: BoxFit.cover,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _navItem(0, Icons.home_filled, "Home"),
-              _navItem(1, Icons.speed, "Meter"),
-              _navItem(2, Icons.list_alt_rounded, "List"),
-              _navItem(3, Icons.history, "History"),
-              _navItem(4, Icons.feedback, "Report"),
-            ],
-          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _navItem(0, Icons.home_filled, "Home"),
+            _navItem(1, Icons.speed, "Meter"),
+            _navItem(2, Icons.list_alt_rounded, "List"),
+            _navItem(3, Icons.history, "History"),
+            _navItem(4, Icons.feedback, "Report"),
+          ],
         ),
       ),
     );

@@ -7,26 +7,23 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // Menggunakan backgroundColor di Scaffold juga bisa sebagai dasar
-      backgroundColor: Color(0xFF141315), 
-      body: Stack(
-        children: [
-          // Background Image dengan warna cadangan
-          Container(
-            decoration: BoxDecoration(
-              color: Color(0xFF141315), // Warna #141315
-              image: DecorationImage(
-                image: AssetImage('assets/app-background.png'),
-                fit: BoxFit.cover,
-                // Tambahkan opacity kalau mau gambarnya agak gelap/blend dengan warna bg
-                opacity: 0.8, 
-              ),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Color(0xFF141315),
+            image: DecorationImage(
+              image: AssetImage('assets/app-background.png'),
+              fit: BoxFit.cover,
+              opacity: 0.8,
             ),
           ),
-          child,
-        ],
-      ),
+        ),
+        // Isi konten kamu
+        child,
+      ],
     );
   }
 }

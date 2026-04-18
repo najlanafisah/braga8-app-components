@@ -155,7 +155,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       );
                     },
                     rowBuilder: (item) => [
-                      Text(item['no'], style: TextStyle(color: Colors.white)),
+                      Padding(
+                        padding: EdgeInsets.only(left: 6),
+                        child: Text(item['no'], style: TextStyle(color: Colors.white)),
+                      ),
                       Expanded(
                         child: Text(
                           item['name'],
