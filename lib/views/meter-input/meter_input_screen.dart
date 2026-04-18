@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:braga8_app_components/widgets/action_button.dart';
+import 'package:braga8_app_components/widgets/action_button_table.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
 import '../../widgets/table_card.dart';
 import '../../widgets/page_header.dart';
@@ -141,7 +141,7 @@ class _MeterInputScreenState extends State<MeterInputScreen> {
                         ),
                         StatusBadge(isChecked: item['isCheck']),
                         StatusBadge(isChecked: false),
-                        ActionButton(
+                        ActionButtonTable(
                           label: item['isCheck'] ? "View" : "Input",
                           icon: item['isCheck'] ? Icons.visibility : Icons.add,
                           color: item['isCheck']

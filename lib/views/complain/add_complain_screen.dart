@@ -5,14 +5,14 @@ import 'package:braga8_app_components/widgets/main_layouts.dart';
 import 'package:braga8_app_components/widgets/success_modal.dart';
 import 'package:flutter/material.dart';
 
-class FormComplain extends StatefulWidget {
-  const FormComplain({super.key});
+class AddComplainScreen extends StatefulWidget {
+  const AddComplainScreen({super.key});
 
   @override
-  State<FormComplain> createState() => _FormComplainState();
+  State<AddComplainScreen> createState() => _AddComplainScreenState();
 }
 
-class _FormComplainState extends State<FormComplain> {
+class _AddComplainScreenState extends State<AddComplainScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -78,32 +78,6 @@ class _FormComplainState extends State<FormComplain> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLabel(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget _buildInputField() {
-    return TextField(
-      style: const TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: const Color(0xFFE5D1C9),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide.none,
         ),
       ),
     );

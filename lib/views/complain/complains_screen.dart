@@ -1,6 +1,6 @@
-import 'package:braga8_app_components/views/complain/edit_laporan_screen.dart';
-import 'package:braga8_app_components/views/complain/form_complain.dart';
-import 'package:braga8_app_components/widgets/action_button.dart';
+import 'package:braga8_app_components/views/complain/add_complain_screen.dart';
+import 'package:braga8_app_components/views/complain/view_complain_screen.dart';
+import 'package:braga8_app_components/widgets/action_button_table.dart';
 import 'package:braga8_app_components/widgets/custom_search_bar.dart';
 import 'package:braga8_app_components/widgets/glassy_btn.dart';
 import 'package:braga8_app_components/widgets/main_layouts.dart';
@@ -131,7 +131,7 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => FormComplain(),
+                              builder: (context) => AddComplainScreen(),
                             ),
                           );
                         },
@@ -175,7 +175,7 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                           ),
                         ),
                         StatusBadge(isChecked: currentItem['isCheck'] ?? false),
-                        ActionButton(
+                        ActionButtonTable(
                           label: "view",
                           icon: Icons.visibility,
                           color: Colors.blueGrey,
@@ -183,7 +183,8 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditLaporanScreen(data: item),
+                                builder: (context) =>
+                                    ViewKomplainScreen(data: item),
                               ),
                             );
                           },

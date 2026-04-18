@@ -1,4 +1,4 @@
-import 'package:braga8_app_components/widgets/action_button.dart';
+import 'package:braga8_app_components/widgets/action_button_table.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/table_card.dart';
@@ -141,7 +141,7 @@ class _DaftarUnitScreenState extends State<DaftarUnitScreen> {
                         ),
                         StatusBadge(isChecked: item['isCheck']),
                         StatusBadge(isChecked: false),
-                        ActionButton(
+                        ActionButtonTable(
                           label: item['isCheck'] ? "View" : "Input",
                           icon: item['isCheck'] ? Icons.visibility : Icons.add,
                           color: item['isCheck']
