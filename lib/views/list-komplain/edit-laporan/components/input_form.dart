@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class InputForm extends StatelessWidget {
   final String label;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final int maxLines;
 
   const InputForm({
     super.key,
     required this.label,
-    required this.controller,
+    this.controller,
     this.maxLines = 1,
   });
 

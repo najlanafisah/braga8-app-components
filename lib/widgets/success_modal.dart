@@ -5,11 +5,7 @@ class SuccessModal extends StatelessWidget {
   final String title;
   final VoidCallback onConfirm;
 
-  const SuccessModal({
-    super.key,
-    required this.title,
-    required this.onConfirm,
-  });
+  const SuccessModal({super.key, required this.title, required this.onConfirm});
 
   static void show(
     BuildContext context, {
@@ -19,8 +15,7 @@ class SuccessModal extends StatelessWidget {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) =>
-          SuccessModal(title: title, onConfirm: onConfirm),
+      builder: (context) => SuccessModal(title: title, onConfirm: onConfirm),
     );
   }
 
@@ -29,7 +24,8 @@ class SuccessModal extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 60, vertical: 150),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 150),
+        constraints: BoxConstraints(maxWidth: 400),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(28),
           border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
@@ -41,10 +37,11 @@ class SuccessModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset("../../assets/success-icon.png", width: 160,),
+            Image.asset("../../assets/success-icon.png", width: 160),
             SizedBox(height: 20),
             Text(
               title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -52,10 +49,7 @@ class SuccessModal extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            GlassyBtn(
-              label: "Kembali",
-              onTap: onConfirm
-            )
+            GlassyBtn(label: "Kembali", onTap: onConfirm),
           ],
         ),
       ),

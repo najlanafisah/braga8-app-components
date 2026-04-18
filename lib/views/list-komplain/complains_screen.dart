@@ -1,4 +1,5 @@
 import 'package:braga8_app_components/views/list-komplain/edit-laporan/edit_laporan_screen.dart';
+import 'package:braga8_app_components/views/list-komplain/form_complain.dart';
 import 'package:braga8_app_components/widgets/action_button.dart';
 import 'package:braga8_app_components/widgets/custom_search_bar.dart';
 import 'package:braga8_app_components/widgets/glassy_btn.dart';
@@ -122,12 +123,17 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                     ),
                     SizedBox(width: 12),
                     SizedBox(
-                      width: 85, 
+                      width: 85,
                       height: 55,
                       child: GlassyBtn(
                         label: "+  Add",
                         onTap: () {
-                          Navigator.pushNamed(context, '/add-screen');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FormComplain(),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -177,8 +183,7 @@ class _ComplainsScreenState extends State<ComplainsScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    EditLaporanScreen(data: item),
+                                builder: (context) => EditLaporanScreen(data: item),
                               ),
                             );
                           },
