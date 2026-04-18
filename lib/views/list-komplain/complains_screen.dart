@@ -1,4 +1,4 @@
-import 'package:braga8_app_components/views/edit-laporan/edit_laporan_screen.dart';
+import 'package:braga8_app_components/views/list-komplain/edit-laporan/edit_laporan_screen.dart';
 import 'package:braga8_app_components/widgets/action_button.dart';
 import 'package:braga8_app_components/widgets/custom_search_bar.dart';
 import 'package:braga8_app_components/widgets/glassy_btn.dart';
