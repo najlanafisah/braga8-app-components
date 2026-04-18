@@ -1,5 +1,5 @@
-import 'package:braga8_app_components/views/list-komplain/components/add_media.dart';
-import 'package:braga8_app_components/views/list-komplain/edit-laporan/components/input_form.dart';
+import 'package:braga8_app_components/views/complain/components/add_media.dart';
+import 'package:braga8_app_components/views/complain/components/input_form.dart';
 import 'package:braga8_app_components/widgets/light_brown_btn.dart';
 import 'package:braga8_app_components/widgets/main_layouts.dart';
 import 'package:braga8_app_components/widgets/success_modal.dart';

@@ -1,4 +1,4 @@
-import 'package:braga8_app_components/views/list-komplain/edit-laporan/components/dark_grey_action_button.dart';
+import 'package:braga8_app_components/views/complain/components/dark_grey_action_button.dart';
 import 'package:flutter/material.dart';
 
 class EditMedia extends StatelessWidget {

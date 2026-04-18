@@ -1,11 +1,11 @@
-import 'package:braga8_app_components/views/list-komplain/edit-laporan/components/edit_media.dart';
-import 'package:braga8_app_components/views/list-komplain/edit-laporan/components/header_title.dart';
-import 'package:braga8_app_components/views/list-komplain/edit-laporan/components/input_form.dart';
+import 'package:braga8_app_components/views/complain/components/edit_media.dart';
+import 'package:braga8_app_components/views/complain/components/header_title.dart';
+import 'package:braga8_app_components/views/complain/components/input_form.dart';
 import 'package:braga8_app_components/widgets/light_brown_btn.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
 import 'package:braga8_app_components/widgets/success_modal.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/main_layouts.dart';
+import '../../widgets/main_layouts.dart';
 
 class EditLaporanScreen extends StatefulWidget {
   final Map<String, dynamic> data;
