@@ -1,3 +1,5 @@
+import 'package:braga8_app_components/views/meter-input/meter_form_screen.dart';
+import 'package:braga8_app_components/views/meter-input/view_meter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:braga8_app_components/widgets/action_button_table.dart';
 import 'package:braga8_app_components/widgets/status_badge.dart';
@@ -141,13 +143,36 @@ class _MeterInputScreenState extends State<MeterInputScreen> {
                         ),
                         StatusBadge(isChecked: item['isCheck']),
                         StatusBadge(isChecked: false),
+
                         ActionButtonTable(
                           label: item['isCheck'] ? "View" : "Input",
                           icon: item['isCheck'] ? Icons.visibility : Icons.add,
                           color: item['isCheck']
                               ? Colors.blueGrey
                               : Colors.orange,
-                          onPressed: () {},
+                          onPressed: () {
+                            if (item['isCheck']) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ViewMeterScreen(
+                                    tenantName: tenant['name'],
+                                    unitData: item,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MeterFormScreen(
+                                    tenantName: tenant['name'],
+                                    unitData: item,
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ],
                     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ViewMedia extends StatelessWidget {
   final String label;
-  final String imagePath; // Path gambar yang mau ditampilkan
+  final String imagePath;
 
   const ViewMedia({super.key, required this.label, required this.imagePath});
 
@@ -47,7 +47,6 @@ class ViewMedia extends StatelessWidget {
     );
   }
 
-  // Fungsi untuk menampilkan Full Screen Modal
   void _showFullImage(BuildContext context) {
     showDialog(
       context: context,
