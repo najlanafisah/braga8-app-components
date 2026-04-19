@@ -1,3 +1,4 @@
+import 'package:braga8_app_components/models/user_model.dart';
 import 'package:braga8_app_components/views/dashboard/components/header_navbar.dart';
 import 'package:flutter/material.dart';
 import 'menu_grid.dart';
@@ -11,12 +12,22 @@ class DashboardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dummy Data jika user belum ada
+    final UserModel dummyUser = UserModel(
+      name: "Jimmy",
+      username: "@jimmy_braga",
+      joinDate: "Jan 2026",
+      role: "Admin",
+      email: "jimmy@eightproperty.com",
+    );
+
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeaderNavbar(),
+          HeaderNavbar(user: dummyUser), 
+          
           PageHeader(
             title: "Halo, Jimmy!",
             subtitle: "Braga8 Utility Billing Management",
@@ -36,41 +47,17 @@ class DashboardBody extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(
-              child: MenuGrid(
-                title: "Meter Input",
-                imagePath: "assets/cardImage/meter-input-img.png",
-                onTap: () => onMenuTap(1),
-              ),
-            ),
+            Expanded(child: MenuGrid(title: "Meter Input", imagePath: "assets/cardImage/meter-input-img.png", onTap: () => onMenuTap(1))),
             SizedBox(width: 16),
-            Expanded(
-              child: MenuGrid(
-                title: "Daftar Unit",
-                imagePath: "assets/cardImage/daftar-unit-img.png",
-                onTap: () => onMenuTap(2),
-              ),
-            ),
+            Expanded(child: MenuGrid(title: "Daftar Unit", imagePath: "assets/cardImage/daftar-unit-img.png", onTap: () => onMenuTap(2))),
           ],
         ),
         SizedBox(height: 20),
         Row(
           children: [
-            Expanded(
-              child: MenuGrid(
-                title: "History",
-                imagePath: "assets/cardImage/history-img.png",
-                onTap: () => onMenuTap(3),
-              ),
-            ),
+            Expanded(child: MenuGrid(title: "History", imagePath: "assets/cardImage/history-img.png", onTap: () => onMenuTap(3))),
             SizedBox(width: 16),
-            Expanded(
-              child: MenuGrid(
-                title: "Complaint",
-                imagePath: "assets/cardImage/complaint-img.png",
-                onTap: () => onMenuTap(4),
-              ),
-            ),
+            Expanded(child: MenuGrid(title: "Complaint", imagePath: "assets/cardImage/complaint-img.png", onTap: () => onMenuTap(4))),
           ],
         ),
       ],
