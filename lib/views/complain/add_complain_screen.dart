@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:braga8_app_components/services/image_service.dart';
 import 'package:braga8_app_components/views/complain/components/add_media.dart';
 import 'package:braga8_app_components/views/complain/components/input_form.dart';
