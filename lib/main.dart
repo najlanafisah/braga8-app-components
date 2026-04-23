@@ -1,4 +1,3 @@
-import 'package:braga8_app_components/views/meter-input/view_meter_screen.dart';
 import 'package:flutter/material.dart';
 import 'views/dashboard/dashboard_screen.dart';
 
@@ -32,7 +31,7 @@ class Braga8App extends StatelessWidget {
         textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.white)),
       ),
       debugShowCheckedModeBanner: false,
-      home: ViewMeterScreen(tenantName: 'solaria', unitData: {},),
+      home: DashboardScreen(),
     );
   }
 }
