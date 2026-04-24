@@ -50,9 +50,8 @@ class _MeterFormScreenState extends State<MeterFormScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SafeArea(
-              child: Stack( // MENGGUNAKAN STACK AGAR BUTTON BISA MELAYANG
+              child: Stack(
                 children: [
-                  // --- AREA KONTEN (SCROLLABLE) ---
                   SingleChildScrollView(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ConstrainedBox(
@@ -60,7 +59,7 @@ class _MeterFormScreenState extends State<MeterFormScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 40), // Jarak atas sedikit diturunkan
+                          const SizedBox(height: 95), 
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                             decoration: BoxDecoration(
@@ -93,17 +92,13 @@ class _MeterFormScreenState extends State<MeterFormScreen> {
                             btnText: _imageFile == null ? 'Ambil Foto' : 'Ganti Foto',
                             imageFile: _imageFile,
                           ),
-                          
-                          // Spacer bawah agar konten tidak tertutup oleh button melayang
-                          const SizedBox(height: 140), 
+                          const SizedBox(height: 110), 
                         ],
                       ),
                     ),
                   ),
-
-                  // --- BUTTON MELAYANG DI BAWAH (CONSISTENT POSITION) ---
                   Positioned(
-                    bottom: 30, // JARAK DARI BAWAH SCREEN (Tidak terlalu mepet)
+                    bottom: 30,
                     left: 20,
                     right: 20,
                     child: LightBrownBtn(
@@ -112,8 +107,8 @@ class _MeterFormScreenState extends State<MeterFormScreen> {
                           context,
                           title: "Berhasil di Tambahkan!",
                           onConfirm: () {
-                            Navigator.pop(context); 
-                            Navigator.pop(context); 
+                            Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                         );
                       },
