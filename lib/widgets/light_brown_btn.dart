@@ -19,11 +19,11 @@ class LightBrownBtn extends StatelessWidget {
             Positioned.fill(
               child: SvgPicture.asset(
                 'assets/loginbtn.svg',
-                fit: BoxFit.fill, 
+                fit: BoxFit.fill,
               ),
             ),
             Align(
-              alignment: const Alignment(0.0, -0.2), 
+              alignment: const Alignment(0.0, -0.25), 
               child: Text(
                 label,
                 style: const TextStyle(

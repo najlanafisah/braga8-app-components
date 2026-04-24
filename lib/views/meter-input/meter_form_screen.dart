@@ -50,67 +50,77 @@ class _MeterFormScreenState extends State<MeterFormScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SafeArea(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: IntrinsicHeight(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFC5A358),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.white.withValues(alpha: .3)),
+              child: Stack( // MENGGUNAKAN STACK AGAR BUTTON BISA MELAYANG
+                children: [
+                  // --- AREA KONTEN (SCROLLABLE) ---
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 40), // Jarak atas sedikit diturunkan
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFC5A358),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.white.withValues(alpha: .3)),
+                            ),
+                            child: const Text(
+                              "Electricity",
+                              style: TextStyle(color: Color(0xFF3D3526), fontSize: 11, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          child: Text(
-                            "Electricity",
-                            style: TextStyle(color: Color(0xFF3D3526), fontSize: 11, fontWeight: FontWeight.bold),
+                          const SizedBox(height: 12),
+                          Text(
+                            widget.tenantName,
+                            style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        SizedBox(height: 12),
-                        Text(
-                          widget.tenantName, // Dinamis dari parameter
-                          style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Unit ${widget.unitData['unit']}", // Dinamis dari parameter
-                          style: TextStyle(color: Colors.white38, fontSize: 16),
-                        ),
-                        SizedBox(height: 32),
-                        InputForm(label: "Meter"),
-                        SizedBox(height: 20),
-                        InputForm(label: "Reading Value"),
-                        SizedBox(height: 20),
-                        AddMedia(
-                          label: "Bukti Meter",
-                          onPickImage: _handlePickImage,
-                          btnText: _imageFile == null ? 'Ambil Foto' : 'Ganti Foto',
-                          imageFile: _imageFile,
-                        ),
-                        SizedBox(height: 80),
-                        LightBrownBtn(
-                          onTap: () {
-                            SuccessModal.show(
-                              context,
-                              title: "Berhasil di Tambahkan!",
-                              onConfirm: () {
-                                Navigator.pop(context); // Tutup Modal
-                                Navigator.pop(context); // Kembali ke list
-                              },
-                            );
-                          },
-                          label: 'Tambahkan',
-                        ),
-                        SizedBox(height: 40),
-                      ],
+                          Text(
+                            "Unit ${widget.unitData['unit']}",
+                            style: const TextStyle(color: Colors.white38, fontSize: 16),
+                          ),
+                          const SizedBox(height: 32),
+                          const InputForm(label: "Meter"),
+                          const SizedBox(height: 20),
+                          const InputForm(label: "Reading Value"),
+                          const SizedBox(height: 20),
+                          AddMedia(
+                            label: "Bukti Meter",
+                            onPickImage: _handlePickImage,
+                            btnText: _imageFile == null ? 'Ambil Foto' : 'Ganti Foto',
+                            imageFile: _imageFile,
+                          ),
+                          
+                          // Spacer bawah agar konten tidak tertutup oleh button melayang
+                          const SizedBox(height: 140), 
+                        ],
+                      ),
                     ),
                   ),
-                ),
+
+                  // --- BUTTON MELAYANG DI BAWAH (CONSISTENT POSITION) ---
+                  Positioned(
+                    bottom: 30, // JARAK DARI BAWAH SCREEN (Tidak terlalu mepet)
+                    left: 20,
+                    right: 20,
+                    child: LightBrownBtn(
+                      onTap: () {
+                        SuccessModal.show(
+                          context,
+                          title: "Berhasil di Tambahkan!",
+                          onConfirm: () {
+                            Navigator.pop(context); 
+                            Navigator.pop(context); 
+                          },
+                        );
+                      },
+                      label: 'Tambahkan',
+                    ),
+                  ),
+                ],
               ),
             );
           },
